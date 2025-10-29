@@ -63,5 +63,7 @@ RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
 
 # Run Gunicorn server
-CMD ["gunicorn", "--config", "backend/gunicorn_config.py", "wsgi:app"]
+# Change to backend directory to match Procfile behavior where imports are relative
+WORKDIR /app/backend
+CMD ["gunicorn", "--config", "gunicorn_config.py", "wsgi:app"]
 
