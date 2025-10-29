@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="#0a0e27" stroke="#0ef2cd" stroke-width="2"/>
+  
+  <!-- Racing circuit track -->
+  <path d="M 16 32 Q 32 20, 48 32 Q 32 44, 16 32" 
+        fill="none" 
+        stroke="#0ef2cd" 
+        stroke-width="3"
+        stroke-linecap="round"/>
+  
+  <!-- EcoDrive "E" letter in center -->
+  <path d="M 26 26 L 38 26 L 38 28 L 28 28 L 28 32 L 36 32 L 36 34 L 28 34 L 28 38 L 38 38 L 38 40 L 26 40 Z" 
+        fill="#0ef2cd"/>
+  
+  <!-- Small eco leaf symbol -->
+  <circle cx="52" cy="18" r="6" fill="#00ff88" opacity="0.9"/>
+  <path d="M 50 18 L 52 14 L 54 18 Z" fill="#0a0e27"/>
+  
+  <!-- Speed lines -->
+  <path d="M 14 14 L 16 16" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 48 14 L 50 16" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 14 50 L 16 48" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 48 50 L 50 48" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+</svg>
+

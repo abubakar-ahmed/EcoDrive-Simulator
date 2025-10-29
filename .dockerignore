@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Frontend build (will be built in Docker)
+build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Git
+.git/
+.gitignore
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Documentation
+*.md
+docs/
+
+# F1Tenth RL (external dependency)
+f1tenth_rl-main/
+
+# FastF1 cache (can be regenerated)
+backend/fastf1_cache/
+
+# Models (large files - comment out if you want to include)
+# backend/models/
+
