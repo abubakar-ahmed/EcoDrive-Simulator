@@ -181,7 +181,7 @@ class SACWrapper:
                     "length": 0.58,
                 },
                 "reset_config": {"type": "rl_grid_static"},
-                "max_laps": 1,
+                
             },
         )
         
@@ -256,7 +256,7 @@ class SACWrapper:
             ).astype(np.float32)
 
 def main(
-    model_path: str = "models/sac_monza_2025-10-29_13-45-14/final_model.zip",
+    model_path: str = "models/sac_monza_2025-10-29_13-45-14/best_model/best_model.zip",
     track: str = "Monza",
     video_recording: bool = False,
     n_episodes: int = 5,
@@ -445,3 +445,4 @@ def main(
 
 if __name__ == "__main__":
     fire.Fire(main)
+
