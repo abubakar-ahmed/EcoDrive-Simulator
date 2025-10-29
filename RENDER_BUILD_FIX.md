@@ -6,23 +6,40 @@ sh: 1: react-scripts: Permission denied
 ==> Build failed 😞
 ```
 
-## Solution
+**Root Cause:** Render is auto-detecting `npm run build` but `react-scripts` doesn't have execute permissions after `npm install`.
 
-This is a permissions issue with node_modules. Use one of these fixes:
+## ✅ Immediate Fix
 
-### Fix 1: Use `npm ci` (Recommended)
+**Go to your Render Static Site → Settings → Build Command**
+
+Replace the auto-detected command with:
+
+```bash
+npm ci && npx react-scripts build
+```
+
+**OR** (if you need to set API URL in build command):
+
+```bash
+npm ci && REACT_APP_API_URL=https://your-backend-url.onrender.com npx react-scripts build
+```
+
+The key is using **`npx react-scripts build`** instead of **`npm run build`**.
+
+## Alternative Solutions
+
+### Fix 1: Use `npm ci` + `npx` (Recommended) ✅
 
 Update your **Build Command** in Render Static Site settings:
 
 ```bash
-npm ci && REACT_APP_API_URL=https://your-backend-url.onrender.com npm run build
+npm ci && REACT_APP_API_URL=https://your-backend-url.onrender.com npx react-scripts build
 ```
 
-**Why `npm ci`?**
-- Clean install (removes node_modules first)
-- Faster and more reliable
-- Ensures proper permissions
-- Uses package-lock.json exactly
+**Why this works:**
+- `npm ci` = Clean install with proper permissions
+- `npx react-scripts build` = Runs react-scripts directly with correct permissions
+- Bypasses the permission issue completely
 
 ### Fix 2: Use `npx` to run react-scripts
 
@@ -48,15 +65,26 @@ Update your **Build Command**:
 rm -rf node_modules package-lock.json && npm install && REACT_APP_API_URL=https://your-backend-url.onrender.com npm run build
 ```
 
-## Recommended Solution
+## ✅ Recommended Solution (Use This!)
 
-**Use Fix 1** (`npm ci`) - it's the cleanest and most reliable:
+**Use Fix 1** (`npm ci` + `npx`) - it's the most reliable:
 
 ```bash
-npm ci && REACT_APP_API_URL=https://ecodrive-backend.onrender.com npm run build
+npm ci && REACT_APP_API_URL=https://ecodrive-backend.onrender.com npx react-scripts build
+```
+
+**OR** set environment variables and use:
+
+```bash
+npm ci && npx react-scripts build
 ```
 
 Replace `ecodrive-backend.onrender.com` with your actual backend URL.
+
+**Why `npx` works:**
+- `npx` ensures scripts run with proper permissions
+- Bypasses the node_modules/.bin permission issue
+- More reliable than npm run in CI/CD environments
 
 ## Environment Variables Alternative
 
