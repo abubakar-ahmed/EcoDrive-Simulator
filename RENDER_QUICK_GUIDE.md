@@ -60,8 +60,15 @@ Render is perfect for hosting both parts of your application:
    - **Root Directory:** Leave empty
    - **Build Command:**
      ```bash
-     npm install && REACT_APP_API_URL=https://ecodrive-backend.onrender.com npm run build
+     npm ci && npm run build
      ```
+     
+     **Or with environment variable:**
+     ```bash
+     npm ci && REACT_APP_API_URL=https://ecodrive-backend.onrender.com npm run build
+     ```
+     
+     > 💡 **Note:** If you get permission errors, use `npm ci` instead of `npm install`
      ⚠️ **Important:** Replace `ecodrive-backend.onrender.com` with your actual backend URL!
    
    - **Publish Directory:** `build`

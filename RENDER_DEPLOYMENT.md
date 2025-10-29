@@ -109,8 +109,10 @@ Render offers two service types:
    - **Root Directory:** Leave empty (root of repo)
    - **Build Command:**
      ```bash
-     npm install && REACT_APP_API_URL=https://your-backend-name.onrender.com npm run build
+     npm ci && REACT_APP_API_URL=https://your-backend-name.onrender.com npm run build
      ```
+     
+     > 💡 **Note:** Using `npm ci` instead of `npm install` for cleaner, more reliable builds
    - **Publish Directory:** `build`
 
    **Important:** Replace `https://your-backend-name.onrender.com` with your actual backend URL from Step 1!
