@@ -6,13 +6,13 @@
   "framework": "create-react-app",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/static/(.*)",
+      "source": "/static/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -21,7 +21,16 @@
       ]
     },
     {
-      "source": "/:path*\\.:ext(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)",
+      "source": "/favicon.ico",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/manifest.json",
       "headers": [
         {
           "key": "Cache-Control",
