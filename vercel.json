@@ -1,8 +1,8 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npx react-scripts build",
   "outputDirectory": "build",
   "devCommand": "npm start",
-  "installCommand": "npm install",
+  "installCommand": "npm ci || npm install",
   "framework": "create-react-app",
   "rewrites": [
     {
