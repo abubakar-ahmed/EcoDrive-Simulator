@@ -11,14 +11,18 @@ services:
     environment:
       - FLASK_ENV=production
       - PORT=5000
-      - CORS_ORIGINS=http://localhost:3000,http://localhost:5000
+      - CORS_ORIGINS=https://ecodrivesimulator1.vercel.app/simulator
       - WORKERS=4
       - LOG_LEVEL=info
     volumes:
-      # Mount models directory if you want to persist trained models
-      - ./backend/models:/app/backend/models:ro
-      # Mount FastF1 cache for faster data loading
-      - ./backend/fastf1_cache:/app/backend/fastf1_cache
+      # Mount models from the persistent 30GB disk
+      - /data/models:/app/backend/models:ro
+
+      # Mount cache from the persistent 30GB disk (read-write)
+      - /data/fastf1_cache:/app/backend/fastf1_cache
+
+      # Add this line for your maps (assuming the path in-container is /app/backend/maps)
+      - /data/maps:/app/backend/maps
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/"]

@@ -37,7 +37,18 @@ except ImportError as e:
     WEB_SIMULATION_AVAILABLE = False
 
 app = Flask(__name__)
-CORS(app)
+
+# Configure CORS - allow specific origins in production, all in development
+cors_origins = os.environ.get('CORS_ORIGINS', '').split(',') if os.environ.get('CORS_ORIGINS') else None
+if cors_origins:
+    # Filter out empty strings
+    cors_origins = [origin.strip() for origin in cors_origins if origin.strip()]
+    if cors_origins:
+        CORS(app, resources={r"/api/*": {"origins": cors_origins}})
+    else:
+        CORS(app)  # Allow all if CORS_ORIGINS is set but empty
+else:
+    CORS(app)  # Allow all origins in development
 
 # Mock data storage
 simulation_data = {
