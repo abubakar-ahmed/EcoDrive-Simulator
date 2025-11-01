@@ -504,31 +504,7 @@ The deployment is fully reproducible through:
 ✅ Functionality demonstrated in target environment  
 ✅ Reproducible deployment process  
 
-## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **International Energy Agency (IEA)** - Sustainability data and insights
-- **FIA Sustainability** - Motorsport sustainability initiatives
-- **Reinforcement Learning Community** - Research and algorithm development
-- **Open Source Community** - Libraries and tools that made this possible
-
-## 📞 Support
-
-For questions, issues, or contributions, please:
-- Open an issue on GitHub
-- Contact the development team
-- Check the documentation and FAQ
 
 ---
 
