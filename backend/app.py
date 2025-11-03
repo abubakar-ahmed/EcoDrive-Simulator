@@ -39,17 +39,36 @@ except ImportError as e:
 app = Flask(__name__)
 
 # Configure CORS - allow specific origins in production, all in development
-cors_origins = os.environ.get('CORS_ORIGINS', '').split(',') if os.environ.get('CORS_ORIGINS') else None
-if cors_origins:
-    # Filter out empty strings
-    cors_origins = [origin.strip() for origin in cors_origins if origin.strip()]
-    if cors_origins:
-        # Allow CORS for all routes from specified origins
-        CORS(app, resources={r"/*": {"origins": cors_origins}}, supports_credentials=True)
-    else:
-        CORS(app)  # Allow all if CORS_ORIGINS is set but empty
+# Default allowed origins (always include these)
+default_origins = [
+    'https://ecodrivesimulator1.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:3001'
+]
+
+# Get additional origins from environment variable
+env_cors_origins = os.environ.get('CORS_ORIGINS', '')
+if env_cors_origins:
+    # Parse and add environment origins
+    env_origins = [origin.strip() for origin in env_cors_origins.split(',') if origin.strip()]
+    # Combine with defaults, removing duplicates
+    cors_origins = list(set(default_origins + env_origins))
 else:
-    CORS(app)  # Allow all origins in development
+    # Use defaults or allow all in development
+    if os.environ.get('FLASK_ENV') == 'production' or os.environ.get('ENVIRONMENT') == 'production':
+        cors_origins = default_origins
+    else:
+        # Allow all in development
+        cors_origins = None
+
+if cors_origins:
+    # Allow CORS for all routes from specified origins
+    CORS(app, resources={r"/*": {"origins": cors_origins}}, supports_credentials=True)
+else:
+    # Allow all origins in development
+    CORS(app)
 
 # Mock data storage
 simulation_data = {
