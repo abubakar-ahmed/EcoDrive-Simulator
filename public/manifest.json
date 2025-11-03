@@ -1,0 +1,21 @@
+{
+  "short_name": "EcoDrive",
+  "name": "EcoDrive Simulator",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0a0e27",
+  "background_color": "#ffffff"
+}
+

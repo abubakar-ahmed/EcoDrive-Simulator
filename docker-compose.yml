@@ -11,7 +11,7 @@ services:
     environment:
       - FLASK_ENV=production
       - PORT=5000
-      - CORS_ORIGINS=https://ecodrivesimulator1.vercel.app/simulator
+      - CORS_ORIGINS=https://ecodrivesimulator1.vercel.app
       - WORKERS=4
       - LOG_LEVEL=info
     volumes:

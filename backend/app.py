@@ -44,7 +44,8 @@ if cors_origins:
     # Filter out empty strings
     cors_origins = [origin.strip() for origin in cors_origins if origin.strip()]
     if cors_origins:
-        CORS(app, resources={r"/api/*": {"origins": cors_origins}})
+        # Allow CORS for all routes from specified origins
+        CORS(app, resources={r"/*": {"origins": cors_origins}}, supports_credentials=True)
     else:
         CORS(app)  # Allow all if CORS_ORIGINS is set but empty
 else:
