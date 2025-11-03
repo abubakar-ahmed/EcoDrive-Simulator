@@ -22,6 +22,7 @@ seaborn>=0.12.2
 stable-baselines3>=2.3.0
 gymnasium>=0.29.1,<0.30.0
 torch>=2.6.0
+PyYAML>=6.0
 
 # F1Tenth dependencies
 opencv-python>=4.9.0.80
