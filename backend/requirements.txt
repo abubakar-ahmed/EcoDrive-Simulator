@@ -24,6 +24,7 @@ seaborn>=0.12.2
 stable-baselines3>=2.3.0
 gymnasium>=0.29.1,<0.30.0
 torch>=2.6.0
+PyYAML
 
 # F1Tenth dependencies
 # Note: f1tenth_gym must be installed from local f1tenth_rl-main directory
