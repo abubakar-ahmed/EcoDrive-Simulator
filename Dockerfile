@@ -43,6 +43,11 @@ RUN pip install --no-cache-dir -r requirements-prod.txt
 # Copy backend code
 COPY backend ./backend
 
+# Copy f1tenth_rl-main directories needed for simulation
+# Copy f1tenth_gym and src directories for f1tenth_wrapper
+COPY f1tenth_rl-main/f1tenth_gym ./f1tenth_rl-main/f1tenth_gym
+COPY f1tenth_rl-main/src ./f1tenth_rl-main/src
+
 # Copy built frontend from builder stage
 COPY --from=frontend-builder /app/build ./static
 

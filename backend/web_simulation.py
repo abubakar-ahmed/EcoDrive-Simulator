@@ -22,18 +22,39 @@ from dataclasses import dataclass, asdict
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
+# Add f1tenth_rl-main paths to sys.path before importing
+# This allows us to import f1tenth_gym and f1tenth_wrapper
+backend_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(backend_dir)
+f1tenth_gym_path = os.path.join(project_root, "f1tenth_rl-main", "f1tenth_gym")
+f1tenth_src_path = os.path.join(project_root, "f1tenth_rl-main", "src")
+
+# Remove any already-imported modules
+if "f1tenth_gym" in sys.modules:
+    del sys.modules["f1tenth_gym"]
+
+# Add paths to sys.path if they exist and aren't already there
+if os.path.exists(f1tenth_gym_path) and f1tenth_gym_path not in sys.path:
+    sys.path.insert(0, f1tenth_gym_path)
+if os.path.exists(f1tenth_src_path) and f1tenth_src_path not in sys.path:
+    sys.path.insert(0, f1tenth_src_path)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 # Import F1Tenth gym and Stable-Baselines3
 try:
     import f1tenth_gym
     from f1tenth_wrapper.env import F1TenthWrapper
     from stable_baselines3 import PPO, SAC
     F1TENTH_AVAILABLE = True
-    print(" F1Tenth gym and Stable-Baselines3 loaded successfully")
+    print(f"✅ F1Tenth gym and Stable-Baselines3 loaded successfully")
+    print(f"   Using f1tenth_gym from: {f1tenth_gym.__file__ if hasattr(f1tenth_gym, '__file__') else 'unknown'}")
 except ImportError as e:
-    print(f" F1Tenth gym not available: {e}")
+    print(f"⚠️  F1Tenth gym not available: {e}")
+    print(f"   Searched paths: {[p for p in sys.path if 'f1tenth' in p]}")
     F1TENTH_AVAILABLE = False
 except Exception as e:
-    print(f" F1Tenth gym failed to load due to dependency issues: {e}")
+    print(f"⚠️  F1Tenth gym failed to load due to dependency issues: {e}")
     F1TENTH_AVAILABLE = False
 
 # Fallback classes when F1Tenth is not available
