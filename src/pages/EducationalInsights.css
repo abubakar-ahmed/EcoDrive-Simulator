@@ -657,6 +657,105 @@
   height: 100%;
 }
 
+/* External Links Modal */
+.external-links-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: rgba(10, 10, 20, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 255, 136, 0.2);
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.external-links-modal-content h2 {
+  color: #00ff88;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.external-links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.external-links-category {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.external-links-category h3 {
+  color: #ff6b35;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+}
+
+.external-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.external-link-item {
+  margin: 0;
+}
+
+.external-link {
+  display: block;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.external-link:hover {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.3);
+  transform: translateX(5px);
+}
+
+.external-link-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.external-link-header svg {
+  color: #00ff88;
+  flex-shrink: 0;
+}
+
+.external-link-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.external-link-description {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  padding-left: 26px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-title {
@@ -698,5 +797,18 @@
   
   .insight-meta {
     justify-content: center;
+  }
+
+  .external-links-modal-content {
+    padding: 20px;
+    max-height: 85vh;
+  }
+
+  .external-links-modal-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .external-links-category h3 {
+    font-size: 1.1rem;
   }
 }

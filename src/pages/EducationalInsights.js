@@ -584,6 +584,43 @@ const EducationalInsights = () => {
           </div>
         </div>
       )}
+
+      {/* External Links Modal */}
+      {showExternalLinks && (
+        <div className="video-modal" onClick={() => setShowExternalLinks(false)}>
+          <div className="external-links-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-video" onClick={() => setShowExternalLinks(false)}>
+              ×
+            </button>
+            <h2>External Resources</h2>
+            <div className="external-links-container">
+              {externalResources.map((category, categoryIndex) => (
+                <div key={categoryIndex} className="external-links-category">
+                  <h3>{category.category}</h3>
+                  <ul className="external-links-list">
+                    {category.links.map((link, linkIndex) => (
+                      <li key={linkIndex} className="external-link-item">
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="external-link"
+                        >
+                          <div className="external-link-header">
+                            <ExternalLink size={16} />
+                            <span className="external-link-title">{link.title}</span>
+                          </div>
+                          <p className="external-link-description">{link.description}</p>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
