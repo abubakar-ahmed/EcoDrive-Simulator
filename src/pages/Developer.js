@@ -226,7 +226,7 @@ const Developer = () => {
         <div className="developer-section">
           <h2>GitHub Repository</h2>
           <a
-            href="https://github.com/yourusername/ecodrive-simulator"
+            href="https://github.com/abubakar-ahmed/EcoDrive-Simulator"
             target="_blank"
             rel="noopener noreferrer"
             className="github-link"
