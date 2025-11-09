@@ -358,9 +358,9 @@ def get_available_models():
         },
         'sac': {
             'name': 'SAC Single-Track',
-            'description': 'Soft Actor-Critic trained on Catalunya track',
+            'description': 'Soft Actor-Critic trained on Silverstone track',
             'path': os.path.join(os.path.dirname(__file__), 'models', '2025-10-08_21-27-56', 'model.zip'),
-            'trained_tracks': ['Catalunya']
+            'trained_tracks': ['Silverstone']
         }
     }
     return jsonify(models)
