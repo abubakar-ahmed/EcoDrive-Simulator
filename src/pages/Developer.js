@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Code, Map, FileArchive, BookOpen, ExternalLink, CheckCircle } from 'lucide-react';
+import config from '../config';
 import './Developer.css';
 
 const Developer = () => {
@@ -9,7 +10,13 @@ const Developer = () => {
   const handleDownload = async (resource, filename) => {
     setDownloading(prev => ({ ...prev, [resource]: true }));
     try {
-      const response = await fetch(`/api/developer/download/${resource}`);
+      const response = await fetch(config.getApiUrl(`/api/developer/download/${resource}`));
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Download failed' }));
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      }
+      
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -21,6 +28,7 @@ const Developer = () => {
       document.body.removeChild(a);
     } catch (error) {
       console.error('Download failed:', error);
+      alert(`Failed to download ${filename}: ${error.message}`);
     } finally {
       setDownloading(prev => ({ ...prev, [resource]: false }));
     }
@@ -70,7 +78,7 @@ const Developer = () => {
       size: '~2 MB',
       icon: BookOpen,
       type: 'docs',
-      filename: 'api_documentation.pdf'
+      filename: 'api_documentation.md'
     }
   ];
 

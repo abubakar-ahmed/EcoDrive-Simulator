@@ -846,7 +846,8 @@ def download_resource(resource_type):
             },
             'documentation': {
                 'path': base_dir.parent / 'README.md',
-                'filename': 'api_documentation.pdf'
+                'filename': 'api_documentation.md',
+                'mimetype': 'text/markdown'
             }
         }
         
@@ -864,11 +865,13 @@ def download_resource(resource_type):
         if resource.get('is_dir'):
             import tempfile
             import zipfile
+            import threading
             
             temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.zip')
             temp_file.close()
+            temp_path = temp_file.name
             
-            with zipfile.ZipFile(temp_file.name, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+            with zipfile.ZipFile(temp_path, 'w', zipfile.ZIP_DEFLATED) as zip_file:
                 if file_path.is_dir():
                     for root, dirs, files in file_path.rglob('*'):
                         for file in files:
@@ -876,17 +879,32 @@ def download_resource(resource_type):
                             arcname = file_path_full.relative_to(file_path)
                             zip_file.write(file_path_full, arcname)
             
+            # Clean up temp file after a delay (allows download to complete)
+            def cleanup_temp_file():
+                import time
+                time.sleep(60)  # Wait 60 seconds for download to complete
+                try:
+                    if Path(temp_path).exists():
+                        os.unlink(temp_path)
+                except:
+                    pass
+            
+            # Start cleanup in background thread
+            cleanup_thread = threading.Thread(target=cleanup_temp_file, daemon=True)
+            cleanup_thread.start()
+            
             return send_file(
-                temp_file.name,
+                temp_path,
                 mimetype='application/zip',
                 as_attachment=True,
                 download_name=resource['filename']
             )
         
         # Handle regular files
+        mimetype = resource.get('mimetype', 'application/octet-stream')
         return send_file(
             str(file_path),
-            mimetype='application/octet-stream',
+            mimetype=mimetype,
             as_attachment=True,
             download_name=resource['filename']
         )
