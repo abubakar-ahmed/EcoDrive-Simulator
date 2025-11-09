@@ -116,7 +116,7 @@ const EducationalInsights = () => {
         </ul>
       `,
       benefits: ['Encourages exploration', 'Handles continuous actions', 'Balances exploration and exploitation'],
-      videoId: 'bRfUxQs7xJI', // SAC Algorithm Tutorial
+      videoId: 'XhfY8T8yBk0', // SAC Algorithm Tutorial
       duration: '15:30',
       difficulty: 'Intermediate',
       category: 'Algorithms'
