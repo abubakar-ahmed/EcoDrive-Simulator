@@ -2,13 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   MapPin, 
-  Car, 
-  Cloud, 
   Settings, 
   Play, 
   ArrowLeft,
-  Zap,
-  Leaf,
 } from 'lucide-react';
 import config from '../config';
 import './SimulationSetup.css';

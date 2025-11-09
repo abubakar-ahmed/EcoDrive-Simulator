@@ -20,10 +20,7 @@ import './SimulationDashboard.css';
 const SimulationDashboard = () => {
   const navigate = useNavigate();
   const [isRunning, setIsRunning] = useState(false);
-  const [currentLap, setCurrentLap] = useState(0);
-  const [totalLaps, setTotalLaps] = useState(3);
   const [simulationTime, setSimulationTime] = useState(0);
-  const [simulationId, setSimulationId] = useState(null);
   const [webSimulationAvailable, setWebSimulationAvailable] = useState(false);
   const [simulationFrame, setSimulationFrame] = useState(null);
   const [simulationError, setSimulationError] = useState(null);

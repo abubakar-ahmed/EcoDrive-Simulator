@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, BarChart3, TrendingUp, Zap, Leaf, Gauge, Crown, Award, Clock, Target, Flame, Wind } from 'lucide-react';
+import { ArrowLeft, TrendingUp, Zap, Leaf, Gauge, Crown, Award, Clock, Target, Wind } from 'lucide-react';
 import TelemetryGraph from '../components/TelemetryGraph';
 import config from '../config';
 import './ResultsComparison.css';
@@ -18,6 +18,7 @@ const ResultsComparison = () => {
 
   useEffect(() => {
     loadComparisonData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Animate values when data loads
@@ -112,11 +113,6 @@ const ResultsComparison = () => {
     }
   });
 
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = (seconds % 60).toFixed(3);
-    return `${mins}:${secs.padStart(6, '0')}`;
-  };
 
   if (loading) {
     return (
