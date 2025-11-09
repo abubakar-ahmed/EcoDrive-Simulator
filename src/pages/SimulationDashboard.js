@@ -20,8 +20,10 @@ import './SimulationDashboard.css';
 const SimulationDashboard = () => {
   const navigate = useNavigate();
   const [isRunning, setIsRunning] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [currentLap, setCurrentLap] = useState(0);
   const [simulationTime, setSimulationTime] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [simulationId, setSimulationId] = useState(null);
   const [webSimulationAvailable, setWebSimulationAvailable] = useState(false);
   const [simulationFrame, setSimulationFrame] = useState(null);
