@@ -29,6 +29,7 @@ const EducationalInsights = () => {
   const [expandedSection, setExpandedSection] = useState(null);
   const [activeVideo, setActiveVideo] = useState(null);
   const [downloading, setDownloading] = useState(false);
+  const [showExternalLinks, setShowExternalLinks] = useState(false);
 
   const insights = [
     {
@@ -259,6 +260,104 @@ const EducationalInsights = () => {
     }
   };
 
+  const externalResources = [
+    {
+      category: 'Research Papers',
+      links: [
+        {
+          title: 'Reinforcement Learning: An Introduction (Sutton & Barto)',
+          url: 'http://incompleteideas.net/book/the-book-2nd.html',
+          description: 'The definitive textbook on reinforcement learning'
+        },
+        {
+          title: 'Proximal Policy Optimization Algorithms',
+          url: 'https://arxiv.org/abs/1707.06347',
+          description: 'Original PPO paper by Schulman et al.'
+        },
+        {
+          title: 'Soft Actor-Critic: Off-Policy Maximum Entropy Deep RL',
+          url: 'https://arxiv.org/abs/1801.01290',
+          description: 'Original SAC algorithm paper by Haarnoja et al.'
+        },
+        {
+          title: 'Deep Reinforcement Learning for Autonomous Driving',
+          url: 'https://arxiv.org/abs/1811.11329',
+          description: 'Survey on RL applications in autonomous driving'
+        }
+      ]
+    },
+    {
+      category: 'Tutorials & Courses',
+      links: [
+        {
+          title: 'Deep RL Bootcamp (Berkeley)',
+          url: 'https://sites.google.com/view/deep-rl-bootcamp/lectures',
+          description: 'Comprehensive deep RL course materials'
+        },
+        {
+          title: 'Reinforcement Learning Specialization (Coursera)',
+          url: 'https://www.coursera.org/specializations/reinforcement-learning',
+          description: 'Online course on RL fundamentals'
+        },
+        {
+          title: 'Spinning Up in Deep RL (OpenAI)',
+          url: 'https://spinningup.openai.com/en/latest/',
+          description: 'Educational resource for deep RL'
+        },
+        {
+          title: 'Stable Baselines3 Documentation',
+          url: 'https://stable-baselines3.readthedocs.io/',
+          description: 'RL algorithms library documentation'
+        }
+      ]
+    },
+    {
+      category: 'Tools & Frameworks',
+      links: [
+        {
+          title: 'Stable Baselines3',
+          url: 'https://github.com/DLR-RM/stable-baselines3',
+          description: 'RL algorithms implementation library'
+        },
+        {
+          title: 'OpenAI Gym',
+          url: 'https://www.gymlibrary.dev/',
+          description: 'RL environments and benchmarks'
+        },
+        {
+          title: 'PyTorch',
+          url: 'https://pytorch.org/',
+          description: 'Deep learning framework'
+        },
+        {
+          title: 'TensorFlow',
+          url: 'https://www.tensorflow.org/',
+          description: 'Machine learning platform'
+        }
+      ]
+    },
+    {
+      category: 'Eco-Driving Resources',
+      links: [
+        {
+          title: 'Eco-Driving Research Papers',
+          url: 'https://scholar.google.com/scholar?q=eco-driving+autonomous+vehicles',
+          description: 'Academic research on eco-driving'
+        },
+        {
+          title: 'Energy-Efficient Autonomous Driving',
+          url: 'https://ieeexplore.ieee.org/search/searchresult.jsp?queryText=energy+efficient+autonomous+driving',
+          description: 'IEEE publications on energy-efficient driving'
+        },
+        {
+          title: 'F1Tenth Autonomous Racing',
+          url: 'https://f1tenth.org/',
+          description: 'F1Tenth racing platform and resources'
+        }
+      ]
+    }
+  ];
+
   return (
     <div className="educational-insights">
       <div className="container">
@@ -440,7 +539,10 @@ const EducationalInsights = () => {
               </div>
               <h3>External Resources</h3>
               <p>Curated links to papers, tutorials, and tools</p>
-              <button className="resource-button">
+              <button 
+                className="resource-button"
+                onClick={() => setShowExternalLinks(true)}
+              >
                 <ExternalLink size={16} />
                 View Links
               </button>
