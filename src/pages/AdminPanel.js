@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Settings, Users, BarChart3, Server, Database, Cpu, HardDrive, RefreshCw } from 'lucide-react';
+import config from '../config';
 import './AdminPanel.css';
 
 const AdminPanel = () => {
@@ -18,7 +19,7 @@ const AdminPanel = () => {
 
   const fetchSystemStats = async () => {
     try {
-      const response = await fetch('/api/admin/system-stats');
+      const response = await fetch(config.getApiUrl('/api/admin/system-stats'));
       const data = await response.json();
       setSystemStats({
         activeSimulations: data.active_simulations || 0,
@@ -35,11 +36,15 @@ const AdminPanel = () => {
 
   const fetchModels = async () => {
     try {
-      const response = await fetch('/api/admin/models');
+      const response = await fetch(config.getApiUrl('/api/admin/models'));
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
       setModels(data.models || []);
     } catch (error) {
       console.error('Failed to fetch models:', error);
+      setModels([]);
     }
   };
 

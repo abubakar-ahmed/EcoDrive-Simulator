@@ -1235,36 +1235,55 @@ def get_models():
                 folder_name = model_folder.name
                 
                 # Determine model type and track
-                if 'ppo' in folder_name.lower():
+                folder_lower = folder_name.lower()
+                if 'ppo' in folder_lower:
                     model_type = 'ppo'
                     if 'multi_track' in folder_name:
                         name = 'PPO Multi-Track'
                         description = 'Proximal Policy Optimization trained on multiple tracks'
                     else:
-                        # Extract track name from folder name
-                        name = 'PPO Single-Track'
-                        description = 'Proximal Policy Optimization model'
-                elif 'sac' in folder_name.lower():
+                        # Extract track name from folder name (e.g., ppo_silverstone_2025-10-22_13-44-55)
+                        name_parts = folder_name.split('_')
+                        track_name = 'Single Track'
+                        if len(name_parts) > 1:
+                            # Skip 'ppo' or 'test' prefix
+                            for part in name_parts[1:]:
+                                if part and not re.match(r'^\d{4}-\d{2}-\d{2}', part):
+                                    track_name = part.title()
+                                    break
+                        name = f'PPO - {track_name}'
+                        description = f'Proximal Policy Optimization model for {track_name}'
+                elif 'sac' in folder_lower:
                     model_type = 'sac'
                     if 'multi_track' in folder_name:
                         name = 'SAC Multi-Track'
                         description = 'Soft Actor-Critic trained on multiple tracks'
                     else:
                         # Extract track name from folder name (e.g., sac_silverstone_2025-10-22_13-44-55)
-                        track_name = 'Unknown'
                         name_parts = folder_name.split('_')
+                        track_name = 'Single Track'
                         if len(name_parts) > 1:
-                            track_name = name_parts[1].replace('sac', '').title()
+                            # Skip 'sac' or 'test' prefix
+                            for part in name_parts[1:]:
+                                if part and not re.match(r'^\d{4}-\d{2}-\d{2}', part):
+                                    track_name = part.title()
+                                    break
                         name = f'SAC - {track_name}'
                         description = f'Soft Actor-Critic model for {track_name}'
                 else:
                     model_type = 'unknown'
-                    name = model_folder.name
+                    name = model_folder.name.replace('_', ' ').title()
                     description = 'Model training directory'
                 
-                # Extract date from folder name (format: YYYY-MM-DD)
-                date_match = re.search(r'(\d{4}-\d{2}-\d{2})', folder_name)
-                last_trained = date_match.group(1) if date_match else 'Unknown'
+                # Extract date and time from folder name (format: YYYY-MM-DD_HH-MM-SS)
+                date_time_match = re.search(r'(\d{4}-\d{2}-\d{2})_(\d{2}-\d{2}-\d{2})', folder_name)
+                if date_time_match:
+                    date_str = date_time_match.group(1)
+                    time_str = date_time_match.group(2).replace('-', ':')
+                    last_trained = f"{date_str} {time_str}"
+                else:
+                    date_match = re.search(r'(\d{4}-\d{2}-\d{2})', folder_name)
+                    last_trained = date_match.group(1) if date_match else 'Unknown'
                 
                 # Get file size
                 try:
