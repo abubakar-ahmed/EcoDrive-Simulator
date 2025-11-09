@@ -146,7 +146,7 @@ const EducationalInsights = () => {
         </ul>
       `,
       benefits: ['Reduced fuel consumption', 'Lower CO₂ emissions', 'Maintained performance levels'],
-      videoId: 'Y4M9z4tUMeU', // Eco-Driving Techniques
+      videoId: '7v1z3vq2xqE', // Eco-Driving Techniques
       duration: '6:45',
       difficulty: 'Beginner',
       category: 'Sustainability'
