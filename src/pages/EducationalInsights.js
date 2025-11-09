@@ -28,6 +28,7 @@ import './EducationalInsights.css';
 const EducationalInsights = () => {
   const [expandedSection, setExpandedSection] = useState(null);
   const [activeVideo, setActiveVideo] = useState(null);
+  const [downloading, setDownloading] = useState(false);
 
   const insights = [
     {
@@ -225,6 +226,30 @@ const EducationalInsights = () => {
     setActiveVideo(null);
   };
 
+  const handleDownloadStudyGuide = async () => {
+    setDownloading(true);
+    try {
+      const response = await fetch(config.getApiUrl('/api/educational/study-guide'));
+      if (!response.ok) {
+        throw new Error('Download failed');
+      }
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'RL_Study_Guide.md';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Download failed:', error);
+      alert('Failed to download study guide. Please try again.');
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   const getDifficultyColor = (difficulty) => {
     switch (difficulty) {
       case 'Beginner': return '#00ff88';
@@ -398,10 +423,14 @@ const EducationalInsights = () => {
                 <Download size={24} />
               </div>
               <h3>Download Study Guide</h3>
-              <p>Comprehensive PDF guide covering all RL concepts</p>
-              <button className="resource-button">
+              <p>Comprehensive guide covering all RL concepts</p>
+              <button 
+                className="resource-button"
+                onClick={handleDownloadStudyGuide}
+                disabled={downloading}
+              >
                 <Download size={16} />
-                Download PDF
+                {downloading ? 'Downloading...' : 'Download Guide'}
               </button>
             </div>
             

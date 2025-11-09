@@ -8,6 +8,7 @@ from datetime import datetime
 import random
 import shutil
 from pathlib import Path
+from io import BytesIO
 
 # Try to import psutil for system monitoring
 try:
@@ -888,6 +889,255 @@ def download_resource(resource_type):
             mimetype='application/octet-stream',
             as_attachment=True,
             download_name=resource['filename']
+        )
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/educational/study-guide', methods=['GET'])
+def download_study_guide():
+    """Download the Reinforcement Learning study guide"""
+    try:
+        study_guide_content = """# Reinforcement Learning Study Guide
+## EcoDrive Simulator Educational Resources
+
+### Table of Contents
+1. Reinforcement Learning Fundamentals
+2. PPO Algorithm Deep Dive
+3. SAC Algorithm Explained
+4. Eco-Driving Principles
+5. Performance Optimization
+
+---
+
+## 1. Reinforcement Learning Fundamentals
+
+### Key Components
+
+**Agent**: The AI system making decisions
+- Observes the environment
+- Takes actions based on observations
+- Learns from rewards and penalties
+
+**Environment**: The world the agent interacts with
+- Provides observations to the agent
+- Responds to agent actions
+- Delivers rewards/penalties
+
+**Actions**: What the agent can do
+- Discrete actions: specific choices (left, right, forward)
+- Continuous actions: smooth control (steering angle, throttle)
+
+**Rewards**: Feedback that guides learning
+- Positive rewards for desired behavior
+- Negative rewards (penalties) for undesired behavior
+- Shaped to guide learning toward goals
+
+**Policy**: The strategy the agent uses to choose actions
+- Maps observations to actions
+- Can be deterministic or stochastic
+- Improves through training
+
+### How RL Works in Racing
+
+In our simulator, the AI agent learns to drive by:
+
+1. **Observing** track conditions, speed, and position
+2. **Taking actions** (accelerate, brake, steer)
+3. **Receiving rewards** for good driving (speed, efficiency)
+4. **Learning from mistakes** and improving over time
+
+---
+
+## 2. PPO Algorithm Deep Dive
+
+### Proximal Policy Optimization (PPO)
+
+PPO is a policy gradient method that uses a clipped objective function to prevent large policy updates, making training more stable.
+
+### PPO Advantages
+
+- **Stability**: Clipped objective prevents destructive updates
+- **Sample Efficiency**: Uses data more effectively than older methods
+- **Continuous Control**: Perfect for driving tasks
+- **Robustness**: Works well across different environments
+
+### PPO in Our Simulator
+
+Our PPO model learns to:
+- Optimize throttle and steering inputs
+- Balance speed with energy efficiency
+- Adapt to different track layouts
+- Minimize lap times while conserving energy
+
+### Key Concepts
+
+**Policy Gradient**: Directly optimizes the policy function
+**Clipping**: Limits how much the policy can change in each update
+**Value Function**: Estimates expected future rewards
+**Advantage Function**: Measures how much better an action is than average
+
+---
+
+## 3. SAC Algorithm Explained
+
+### Soft Actor-Critic (SAC)
+
+SAC is an off-policy algorithm that maximizes both expected reward and entropy, encouraging exploration while maintaining good performance.
+
+### SAC Key Features
+
+- **Entropy Regularization**: Encourages exploration
+- **Off-Policy Learning**: Can learn from past experiences
+- **Continuous Actions**: Handles smooth control inputs
+- **Sample Efficiency**: Good data utilization
+
+### Why SAC for Eco-Driving
+
+SAC excels at finding creative solutions:
+- Discovers unconventional but efficient racing lines
+- Explores different energy management strategies
+- Balances exploration with exploitation
+- Adapts to changing track conditions
+
+### Key Concepts
+
+**Actor-Critic**: Combines policy (actor) and value (critic) learning
+**Soft Updates**: Uses target networks for stability
+**Entropy Bonus**: Rewards exploration
+**Replay Buffer**: Stores past experiences for learning
+
+---
+
+## 4. Eco-Driving Principles
+
+### Sustainable Racing Strategies
+
+AI-powered eco-driving can reduce fuel consumption by 10-20% while maintaining competitive lap times, contributing to sustainable mobility.
+
+### Eco-Driving Techniques
+
+**Smooth Acceleration**: Gradual speed increases reduce energy waste
+**Anticipatory Braking**: Early, gentle braking conserves energy
+**Optimal Racing Lines**: Minimize distance and energy consumption
+**Energy Management**: Strategic power usage throughout the lap
+
+### Environmental Impact
+
+Eco-driving benefits:
+- Reduces CO₂ emissions by 15-25%
+- Decreases fuel consumption significantly
+- Extends vehicle lifespan
+- Promotes sustainable racing practices
+
+### Practical Tips
+
+1. **Plan Ahead**: Look ahead on the track to anticipate turns
+2. **Maintain Momentum**: Avoid unnecessary braking and acceleration
+3. **Optimize Lines**: Find the most efficient path through corners
+4. **Energy Budgeting**: Manage energy use across the entire lap
+
+---
+
+## 5. Performance Optimization
+
+### Continuous Learning and Adaptation
+
+Our AI models continuously learn and adapt to different track conditions, weather patterns, and vehicle characteristics.
+
+### Adaptive Learning Process
+
+- **Track Adaptation**: Learns each circuit's unique characteristics
+- **Weather Response**: Adjusts strategy for conditions
+- **Vehicle Dynamics**: Optimizes for specific car parameters
+- **Continuous Improvement**: Gets better with each lap
+
+### Optimization Metrics
+
+- Lap time minimization
+- Energy efficiency maximization
+- Consistency across different conditions
+- Adaptability to new scenarios
+
+### Training Process
+
+1. **Initial Training**: Learn basic driving skills
+2. **Fine-tuning**: Adapt to specific tracks
+3. **Optimization**: Refine performance metrics
+4. **Evaluation**: Test on unseen scenarios
+
+---
+
+## Learning Paths
+
+### Beginner Path (30 min)
+- RL Fundamentals
+- Eco-Driving Principles
+
+### Intermediate Path (45 min)
+- PPO Algorithm
+- SAC Algorithm
+
+### Advanced Path (60 min)
+- Performance Optimization
+- Advanced Techniques
+
+---
+
+## Additional Resources
+
+### Recommended Reading
+- "Reinforcement Learning: An Introduction" by Sutton & Barto
+- "Deep Reinforcement Learning" research papers
+- Eco-driving research publications
+
+### Online Courses
+- Reinforcement Learning Specialization (Coursera)
+- Deep RL Bootcamp (Berkeley)
+- Autonomous Driving courses
+
+### Tools and Frameworks
+- Stable Baselines3 (RL algorithms)
+- OpenAI Gym (environments)
+- PyTorch/TensorFlow (deep learning)
+
+---
+
+## Practice Exercises
+
+1. **Implement a Simple RL Agent**: Create a basic Q-learning agent
+2. **Tune Hyperparameters**: Experiment with learning rates and exploration
+3. **Design Reward Functions**: Create rewards for eco-driving
+4. **Compare Algorithms**: Test PPO vs SAC on the same track
+
+---
+
+## Glossary
+
+**Agent**: The AI system learning to make decisions
+**Environment**: The world the agent interacts with
+**Policy**: Strategy for choosing actions
+**Reward**: Feedback signal for learning
+**Episode**: One complete simulation run
+**Exploration**: Trying new actions
+**Exploitation**: Using known good actions
+**Value Function**: Expected future rewards
+**Q-Function**: Value of taking an action in a state
+
+---
+
+Generated by EcoDrive Simulator
+For more information, visit the Educational Insights page.
+"""
+
+        # Create an in-memory file
+        file_buffer = BytesIO(study_guide_content.encode('utf-8'))
+        
+        return send_file(
+            file_buffer,
+            mimetype='text/markdown',
+            as_attachment=True,
+            download_name='RL_Study_Guide.md'
         )
         
     except Exception as e:
