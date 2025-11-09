@@ -15,8 +15,6 @@ import {
   Clock,
   Users,
   Globe,
-  Car,
-  Gauge,
   Lightbulb,
   CheckCircle,
   ExternalLink,
@@ -24,6 +22,7 @@ import {
   Star
 } from 'lucide-react';
 import './EducationalInsights.css';
+import config from '../config';
 
 const EducationalInsights = () => {
   const [expandedSection, setExpandedSection] = useState(null);

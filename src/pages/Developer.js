@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Code, Map, FileArchive, BookOpen, ExternalLink, CheckCircle } from 'lucide-react';
+import { Download, Code, Map, FileArchive, BookOpen, ExternalLink } from 'lucide-react';
 import config from '../config';
 import './Developer.css';
 
@@ -96,7 +96,7 @@ const Developer = () => {
     {
       step: 3,
       title: 'Set Up Environment',
-      code: 'export PYTHONPATH="${PYTHONPATH}:./f1tenth_rl-main"'
+      code: 'export PYTHONPATH="$PYTHONPATH:./f1tenth_rl-main"'
     },
     {
       step: 4,

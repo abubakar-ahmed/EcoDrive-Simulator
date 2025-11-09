@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Settings, Users, BarChart3, Server, Database, Cpu, HardDrive, RefreshCw } from 'lucide-react';
+import { ArrowLeft, Users, BarChart3, Server, Database, Cpu, HardDrive, RefreshCw } from 'lucide-react';
 import config from '../config';
 import './AdminPanel.css';
 
